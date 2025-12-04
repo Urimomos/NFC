@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'com.example.nfclink'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.nfclink"
         minSdk 26
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -23,18 +23,28 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
+    // Versiones "Viejas Confiables" compatibles con compileSdk 33
 
-    implementation libs.appcompat
-    implementation libs.material
-    implementation libs.activity
-    implementation libs.constraintlayout
-    testImplementation libs.junit
-    androidTestImplementation libs.ext.junit
-    androidTestImplementation libs.espresso.core
+    // Core KTX 1.9.0 es la última "segura" antes de que exigieran SDK 34
+    implementation 'androidx.core:core-ktx:1.9.0'
+
+    // Appcompat 1.6.1 es estable y funciona bien con lo anterior
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    // Material Design un poco más antiguo para evitar conflictos
+    implementation 'com.google.android.material:material:1.9.0'
+
+    // ConstraintLayout estándar
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Testing (esto no afecta la compilación, pero se deja por defecto)
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
